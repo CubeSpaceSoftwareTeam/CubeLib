@@ -1,0 +1,62 @@
+List Name (source); List Value; List Value Name (source); List Value Name (display); List Value Description
+BlockSize; 0; Bytes32; 32 Bytes; Bytes in one image block
+ ; 1; Bytes64; 64 Bytes; Bytes in one image block
+ ; 2; Bytes128; 128 Bytes; Bytes in one image block
+ ; 3; Bytes256; 256 Bytes; Bytes in one image block
+IDModeVal; 0; Tracking; Tracking Mode; 
+ ; 1; Lost; Lost Mode; 
+Mode; 0; TrackingMode; Tracking Mode; ID tracking mode
+ ; 1; LostMode; Lost Mode; ID lost in space mode
+ResetCause; 1; PoRst; Power on reset; Power on reset
+ ; 2; BodUnregRst; Brown out detector (unregulated power); Brown out triggered reset
+ ; 3; BodRegRst; Brown out detector (regulated power); Brown out triggered reset
+ ; 4; ExtRstOrWdogRst; External reset or watchdog reset; External reset or watchdog reset
+ ; 5; ExtRst; External reset; External (Reset pin) reset
+ ; 6; WdoRst; Watchdog reset; Reset caused by watchdog
+ ; 7; LockupSysReqRst; Cortex-M3 lockup reset or Cortex-M3 system request reset; Lockup reset or system requested reset
+ ; 8; LockupRst; Cortex-M3 lockup reset; Lockup reset
+ ; 9; SysReqRst; Cortex-M3 system request reset; System request reset
+ ; 10; Unknown; Undetermined reset cause; Undetermined reset cause
+TaskStatusVal; 0; PoweringUp; CubeStar is initializing; CubeStar is initializing
+ ; 1; PoweredUp; CubeStar is initialized and ready; CubeStar is initialized and ready
+ ; 2; InitializingCamera; Initializing the image sensor; Initializing the image sensor
+ ; 3; CameraInitializationFailed; Camera initialization failed; Camera Initialization failed
+ ; 4; CameraInitialized; Image sensor ready; Image sensor ready
+ ; 5; SettingExposure; Setting new exposure value; Setting new exposure value
+ ; 6; ExposureSetFailed; Setting new Exposure failed; Setting new Exposure failed
+ ; 7; ExposureSet; New Exposure set; New Exposure set
+ ; 8; WritingToImageSensor; Writing to image sensor; Writing to image sensor
+ ; 9; WritingToImageSensorComplete; Complete write operation to image sensor; Complete write operation to image sensor
+ ; 10; ReadingFromImageSensor; Reading from image sensor; Reading from image sensor
+ ; 11; ReadFromImageSensorComplete; Read from image sensor complete; Read from image sensor complete
+ ; 12; ReceivingImage; Receiving image being uploaded over UART; Receiving image being uploaded over UART
+ ; 13; ImageReceived; Received image uploaded from UART; Received image uploaded from UART
+ ; 14; ImageReceivedFailed; Image received failed; Image was not successfully received
+ ; 15; CapturingImage; Capturing new image; Capturing new image
+ ; 16; ImageCaptureFailed; Image Capture Failed; Image Capture Failed
+ ; 17; ImageCaptured; New image captured; New image captured
+ ; 18; SettingImageBlock; Setting new image block; Setting new image block
+ ; 19; ImageBlockSet; Image block selected; Image block selected
+ ; 20; ImageBlockSetFailed; Image block set failed; Failed to set the image block
+ ; 21; DetectingStars; Detecting stars; Detecting stars
+ ; 22; StarDetectionFailed; Detection failed; Detection failed
+ ; 23; StarsDetected; Stars detected; Stars detected
+ ; 24; IdentifyingStars; Identifying stars; Identifying stars
+ ; 25; StarIdentificationFailed; Star ID failed; Star ID failed
+ ; 26; StarsIdentified; Stars identified; Stars identified
+ ; 27; CalculatingAttitude; Calculating attitude; Calculating attitude
+ ; 28; AttitudeCalculationFailed; Attitude calculation failed; Attitude calculation failed
+ ; 29; AttitudeCalculated; Attitude calculated; Attitude calculated
+ ; 30; TestSRAM; Testing the SRAM; Testing the SRAM
+ ; 31; SRAMtestComplete; SRAM test complete; SRAM test complete
+ ; 32; CapturingTestPattern; Capturing image sensor test pattern; Capturing image sensor test pattern
+ ; 33; TestPatternCaptured; Image sensor test pattern captured; Image sensor test pattern captured
+ ; 34; TestPatternCaptureFailed; Test pattern capture failed; The test patern could not be captured
+ ; 35; FindingBestStars; Finding best stars; Finding best stars
+ ; 36; BestStarsSearchFailed; Best stars search failed; Best stars search failed
+ ; 37; BestStarsFound; Best star found; Best star found
+ ; 38; StreamingImageDown; Stream image down; Stream image down
+ ; 39; ImageDownloadComplete; Image download complete; Image download complete
+TestPatternType; 0; Moving; Moving; Test pattern changes from line to line and from frame to frame
+ ; 1; Fixed; Fixed; Ramp generator always starting at first pixel
+ ; 2; Ramping; Ramping; All output values in smallest possible region

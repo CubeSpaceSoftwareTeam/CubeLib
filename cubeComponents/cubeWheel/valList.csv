@@ -1,0 +1,5 @@
+List Name (source); List Value; List Value Name (source); List Value Name (display); List Value Description
+ControlModeVal; 0; Idle; Idle; Idle mode
+ ; 1; NoControl; No Control; No control mode
+ ; 2; DutyCycleInput; Duty Cycle Input; Duty cycle input mode
+ ; 3; SpeedController; Speed Controller; Speed controller mode

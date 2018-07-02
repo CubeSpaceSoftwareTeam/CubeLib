@@ -1,0 +1,188 @@
+List Name (source); List Value; List Value Name (source); List Value Name (display); List Value Description
+ExecutionWaypoints; 0; Init; Init; Busy with initialization
+ ; 1; Idle; Idle; Idle
+ ; 2; SensorActuatorComms; Sensor/Actuator Communications; Sensor/Actuator Communications
+ ; 3; AdcsUpdate; ADCS Update; ADCS Estimation & Control Update
+ ; 4; PeripheralPowerSet; Perhipheral Power commands (over I2C); Perhipheral Power commands (over I2C)
+ ; 5; SampleTemperature; CPU Temperature Sampling; CPU Temperature Sampling
+ ; 6; ImageDownload; Image Download; Image Download
+ ; 7; ImageCompression; Image Compression; Image Compression
+ ; 8; ImageSaveToSd; Saving Image to SD Card; Saving Image to SD Card
+ ; 9; Logging; Logging; Logging
+ ; 10; LogCompression; Log File Compression; Log File Compression
+ ; 11; LogSaveToSd; Saving Log to SD Card; Saving Log to SD Card
+ ; 12; WritingToFlash; Writing to flash; Writing to flash memory
+AdcsRunMode; 0; AdcsOff; Off; ADCS loop is inactive
+ ; 1; AdcsEnabled; Enabled; ADCS 1Hz loop is active
+ ; 2; AdcsTriggered; Triggered; ADCS will execute control loop only when triggered
+ ; 3; AdcsSimulation; Simulation; ADCS is in simulation mode
+AxisSelect; 0; PosX; Positive X; Positive X
+ ; 1; NegX; Negative X; Negative X
+ ; 2; PosY; Positive Y; Positive Y
+ ; 3; NegY; Negative Y; Negative Y
+ ; 4; PosZ; Positive Z; Positive Z
+ ; 5; NegZ; Negative Z; Negative Z
+ ; 6; NotUsed; Not Used; Not Used
+BusyStatus; 0; Idle; Idle; Idle
+ ; 1; Waiting; Waiting to capture; Waiting to capture
+ ; 2; Capturing; Capturing; Capturing
+ ; 3; Detecting; Detecting; Detecting
+CamSelect; 0; CamCam1; Cam1; Cam1 camera
+ ; 1; CamCam2; Cam2; Cam2 camera
+ ; 2; CamStar; Star; Star camera
+CaptureResult; 0; CaptureStartup; Startup; Start-up
+ ; 1; CapturePending; Pending; Capture pending
+ ; 2; CaptureSuccessOwn; SuccessOwn; Successfully captured (own SRAM)
+ ; 3; CaptureSuccessShift; SuccessShift; Successfully captured (Other SRAM)
+ ; 4; CaptureTimout; Timeout; Camera timout
+ ; 5; CaptureSRAMErr; SRAMError; SRAM overcurrent
+ConModeSelect; 0; ConNone; No control; No control
+ ; 1; ConBdot; Detumbling control; Detumbling control
+ ; 2; ConYspin; Y-Thomson spin; Y-Thomson spin
+ ; 3; ConYwheelInit; Y-Wheel momentum stabilized - Initial Pitch Acquisition; Y-Wheel momentum stabilized - Initial Pitch Acquisition
+ ; 4; ConYwheel; Y-Wheel momentum stabilized - Steady State; Y-Wheel momentum stabilized - Steady State
+ ; 5; ConXYZwheel; XYZ-Wheel control; XYZ-Wheel control
+ ; 6; ConRWSunTrack; Rwheel sun tracking control; Rwheel sun tracking control
+ ; 7; ConRWTargetTrack; Rwheel target tracking control; Rwheel target tracking control
+ ; 8; ConVeryFastDetumbling; Very Fast-spin Detumbling control; 10Hz Detumbling control within CubeControl
+ ; 9; ConFastDetumbling; Fast-spin Detumbling control; Fast Detumbling control
+ ; 10; ConUser1; User Defined Control Mode 1; User defined, or custom control mode 1
+ ; 11; ConUser2; User Defined Control Mode 2; User defined, or custom control mode 2
+ ; 12; ConStopRW; Stop R-wheels; Stop all R-wheels
+ ; 13; ConUser3; User Defined Control Mode 3; User defined, or custom control mode 3
+DetectResult; 0; DetectStartup; Startup; Start-up
+ ; 1; DetectNoDetect; NoDetect; No detection scheduled
+ ; 2; DetectPending; Pending; Detection pending
+ ; 3; DetectTooManyEdges; TooManyEdges; Nadir error - too many detected edges
+ ; 4; DetectTooFewEdges; TooFewEdges; Nadir error - not enought edges detected
+ ; 5; DetectBadFit; BadFit; Nadir error - bad fit
+ ; 6; DetectSunNotFound; SunNotFound; Sun error - sun not found
+ ; 7; DetectSuccess; Success; Successful detection
+EstimModeSelect; 0; EstNone; No attitude estimation; No attitude estimation
+ ; 1; EstMemsRate; MEMS rate sensing; MEMS rate sensing
+ ; 2; EstMagRkf; Magnetometer rate filter; Magnetometer rate filter
+ ; 3; EstPitchRkf; Magnetometer rate filter with pitch estimation; Magnetometer rate filter with pitch estimation
+ ; 4; EstTriad; Magnetometer and Fine-sun TRIAD algorithm; Magnetometer and Fine-sun TRIAD algorithm
+ ; 5; EstFullEkf; Full-state EKF; Full-state EKF
+ ; 6; EstGyroEkf; MEMS gyro EKF; MEMS gyro EKF
+GpsSolutionStatus; 0; SolutionComputed; Solution computed; Solution computed
+ ; 1; InsufficientObs; Insufficient observations; Insufficient observations
+ ; 2; NoConvergence; No convergence; No convergence
+ ; 3; Singularity; Singularity at parameters matrix; Singularity at parameters matrix
+ ; 4; CovTrace; Covariance trace exceeds maximum; Covariance trace exceeds maximum
+ ; 5; ColdStart; Not yet converged from cold start; Not yet converged from cold start
+ ; 6; VhLimit; Height or velocity limits exceeded; Height or velocity limits exceeded
+ ; 7; Variance; Variance exceeds limits; Variance exceeds limits
+ ; 8; IntegrityWarning; Large residuals make position unreliable; Large residuals make position unreliable
+ ; 9; Pending; Calculating comparison to user provided; Calculating comparison to user provided
+ ; 10; InvalidFix; The fixed position is invalid; The fixed position is invalid
+ ; 11; Unauthorized; Position type is unauthorized; Position type is unauthorized
+ImSaveStatus; 0; ImgSaveNoError; No Error; No Error
+ ; 1; CameraTimeout; Timeout waiting for sensor to become available; Timeout waiting for sensor to become available
+ ; 2; DownloadTimeout; Timeout waiting for next frame to become ready; Timeout waiting for next frame to become ready
+ ; 3; DownloadChecksum; Checksum mismatch between donwloaded frame and unit frame; Checksum mismatch between donwloaded frame and unit frame
+ ; 4; SdCardError; Error writing to SD card; Error writing to SD card
+ImSize; 0; Size0; Size 0; 1024 x 1024 pixels
+ ; 1; Size1; Size 1; 512 x 512 pixels
+ ; 2; Size2; Size 2; 256 x 256 pixels
+ ; 3; Size3; Size 3; 128 x 128 pixels
+ ; 4; Size4; Size 4; 64 x 64 pixels
+MagModeVal; 0; MainMagOnly; MainMagOnly; Only main magnetometer is sampled and used
+ ; 1; RedMagOnly; RedMagOnly; Only redundant magnetometer is sampled and used
+ ; 2; BothMagMainUsed; BothMagMainUsed; Both magnetometers are sampled but main is used
+ ; 3; BothMagRedUsed; BothMagRedUsed; Both magnetometers are sampled but redundant is used
+NadirResult; 0; NadirNoError; No Error; No Error
+ ; 1; NadirTimeout; Camera timeout; Camera timeout
+ ; 4; NadirOvercurrent; Nadir SRAM Overcurrent detected; Nadir SRAM Overcurrent detected
+ ; 10; NadirTooManyEdges; Too many edges; Too many edges
+ ; 11; NadirNotEnoughEdges; Not enough edges; Not enough edges
+ ; 12; NadirMatrixErr; Matrix Inversion Error; Matrix Inversion Error
+ ; 13; NadirBadFit; Bad Horizon Fit; Bad Horizon Fit
+ ; 255; NadirNoDetect; No detection performed; No detection performed
+PowerSelect; 0; PowOff; Permanently Off; Permanently Off
+ ; 1; PowOn; Permanently On; Permanently On
+ ; 2; PowAuto; Power state depends on current control mode; Power state depends on current control mode
+ ; 3; PowSim; Simulated Auto Mode; Simulate power control - Nodes are not actually enabled, but the ACP behaves as if they are. This setting is used for HIL simulations
+Stars; 0; Zero; Zero; Zero
+ ; 1; One; One; One
+ ; 2; Two; Two; Two
+SunResult; 0; SunNoError; No Error; No Error
+ ; 1; SunTimeout; Camera timeout; Camera timeout
+ ; 4; SunOvercurrent; Sun SRAM Overcurrent detected; Sun SRAM Overcurrent detected
+ ; 20; SunNotFound; Sun not found; Sun not found
+ ; 255; SunNoDetect; No detection performed; No detection performed
+FileType; 0; Binary; Binary; Binary File
+ ; 1; EvtLog; Event Log; Event Log File
+ ; 2; TlmLog; Telemetry Log; Telemetry Log File
+ ; 3; JpgImg; JPG Image; JPG Image File
+ ; 4; BmpImg; BMP Image; BMP Image File
+ ; 5; Payload1; Payload1; Payload1 File
+ ; 6; Payload2; Payload2; Payload2 File
+ ; 7; Payload3; Payload3; Payload3 File
+ ; 8; Payload4; Payload4; Payload4 File
+ ; 15; IndexFile; Index; Index File
+FileUploadDestination; 2; UlEeprom; EEPROM; EEPROM
+ ; 3; UlFlash1; Flash program 1; Flash program 1
+ ; 4; UlFlash2; Flash program 2; Flash program 2
+ ; 5; UlFlash3; Flash program 3; Flash program 3
+ ; 6; UlFlash4; Flash program 4; Flash program 4
+ ; 7; UlFlash5; Flash program 5; Flash program 5
+ ; 8; UlFlash6; Flash program 6; Flash program 6
+ ; 9; UlFlash7; Flash program 7; Flash program 7
+ ; 10; UlSdUser1; SD User file 1; SD User file 1
+ ; 11; UlSdUser2; SD User file 2; SD User file 2
+ ; 12; UlSdUser3; SD User file 3; SD User file 3
+ ; 13; UlSdUser4; SD User file 4; SD User file 4
+ ; 14; UlSdUser5; SD User file 5; SD User file 5
+ ; 15; UlSdUser6; SD User file 6; SD User file 6
+ ; 16; UlSdUser7; SD User file 7; SD User file 7
+ ; 17; UlSdUser8; SD User file 8; SD User file 8
+JpgConvertResult; 0; NoConversion; Nothing Converted Yet; Nothing Converted Yet
+ ; 1; ConvertOk; Success; Success
+ ; 2; FileLoadError; File Load Error; File Load Error
+ ; 3; BusyConverting; Busy; Busy
+BootCause; 0; Unexpected; Unexpected; Unexpected reset
+ ; 1; TrxuvI2cError; Not Used; 
+ ; 2; CommsTimeout; Communications Timeout; Timeout due to lack of communications
+ ; 3; CommandedMcuReset; Commanded; Software commanded MCU reset
+ ; 4; CommandedEpsReset; Not Used; 
+ ; 5; SramLatchup; SRAM Latchup; Latchup detected in SRAM
+BootProgramsList; 0; RunBootloader; Bootloader; Bootloader
+ ; 1; RunInternalFlashProgram; Internal Flash Program; Internal Flash Program
+ ; 2; RunEeprom; EEPROM; EEPROM
+ ; 3; RunExtFlash1; External Flash Program 1; External Flash Program 1
+ ; 4; RunExtFlash2; External Flash Program 2; External Flash Program 2
+ ; 5; RunExtFlash3; External Flash Program 3; External Flash Program 3
+ ; 6; RunExtFlash4; External Flash Program 4; External Flash Program 4
+ ; 7; RunExtFlash5; External Flash Program 5; External Flash Program 5
+ ; 8; RunExtFlash6; External Flash Program 6; External Flash Program 6
+ ; 9; RunExtFlash7; External Flash Program 7; External Flash Program 7
+BootStatus; 0; BootNew; New Selection; New Selection
+ ; 1; BootSuccess; Boot Success; Boot Success
+ ; 2; BootTry1; 1 Failed boot attempt; 1 Failed boot attempt
+ ; 3; BootTry2; 2 Failed boot attempts; 2 Failed boot attempts
+ ; 4; BootFail; 3 Failed boot attempts; 3 Failed boot attempts
+ResetCause; 0; PowerOnReset; Power-On Reset; Power-On Reset
+ ; 1; BrownOutRegulated; Brown-Out Detected on Regulated Power; Brown-Out Detected on Regulated Power
+ ; 2; BrownOutUnregulated; Brown-Out Detected on Unregulated Power; Brown-Out Detected on Unregulated Power
+ ; 3; ExternalWatchdog; External Watchdog Reset; External Watchdog Reset
+ ; 4; ExternalReset; External Reset; External Reset
+ ; 5; WatchdogReset; Watchdog Reset; Watchdog Reset
+ ; 6; LockupSystemReset; Lockup System Reset; Lockup System Reset
+ ; 7; LockupReset; Lockup Reset; Lockup Reset
+ ; 8; SystemReqReset; System Request Reset; System Request Reset
+ ; 9; BackupBrownOut; Backup Brown-Out; Backup domain brown-out reset
+ ; 10; BackupModeRst; Backup Mode Reset; Backup mode reset
+ ; 11; BackupModeRST_BackupBrownOutVddRegulated; Backup Mode RST and Backup Brown-Out Vdd Regulated; Backup Mode reset and Backup domain brown-out on VDD regulated
+ ; 12; BackupModeRST_BackupBrownOutVddRegulated_BrownOutRegulated; BackupModeRST and Backup Brown-Out Vdd Regulated and Brown-Out Regulated; Backup Mode reset and Backup domain brown-out on VDD regulated and brown out on regulated
+ ; 13; BackupModeRST_WatchdogReset; Backup Mode RST and Watchdog Reset; Backup mode reset and Watchdog reset
+ ; 14; BackupBrownOutBuvin_SystemReqReset; Backup Brown-Out Buvin and System Request Reset; Backup Domain brown-out on BUVIN and System request reset.
+ ; 15; Unknown; Unkown Reset Cause; Unkown Reset Cause
+SramBank; 1; Sram1; SRAM bank 1; SRAM bank 1
+ ; 2; Sram2; SRAM bank 2; SRAM bank 2
+TcErrorReason; 0; NoError; No Error; No error
+ ; 1; InvalidTc; Invalid TC; Invalid telecommand ID
+ ; 2; IncorrectLen; Incorrect Length; Incorrect TC parameter length
+ ; 3; IncorrectParams; Incorrect Parameter; Incorrect TC parameter value
+SdLogSelect; 0; SdLogPrimary; Primary SD Card; Use Primary (on-board) SD card for log file
+ ; 1; SdLogSecondary; Secondary SD Card; Use Secondary SD card for log file

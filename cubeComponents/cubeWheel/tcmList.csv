@@ -1,0 +1,23 @@
+ID; Name (source); Name (display); Description; Frame Length (bytes); Channel Offset (bits); Channel Length (bits); Channel Name (source); Channel Name (display); Channel Data Type; Channel Description; Calibration Function (CHANNELVAL=...); Calibration Function Inverse (USERVAL=...); Unit; Range Min; Range Max; List Name (source); Part-Of-ID; Start Channel; Num Channel; Mirrored TC ID; Group
+0; Reset; Reset; Perform a microcontroller reset; 1; 0; 8; ResetParam; Reset Parameter; UnsignedInteger; Reset parameter. This has to be set to 85 (decimal) to perform the reset.; ; ; ; 0; 0; ; ; 0; 0;
+2; WheelSpeedRef; Wheel Reference Speed; Set momentum wheel reference speed; 2; 0; 16; SpeedRef; Reference Speed; SignedInteger; Wheel reference speed; RAWVAL/2.0; (USERVAL)*2.0; RPM; -10000; 10000; ; ; 0; 0;
+3; WheelTorque; Wheel Commanded Torque; Set momentum wheel commanded torque; 2; 0; 16; DutyCycle; Duty Cycle; SignedInteger; Duty cycle of motor PWM control signal. The torque provided by the motor will be proportional to the PWM signal; ; ; %; -100; 100; ; ; 0; 0;
+7; MotorPower; Motor Power State; Turn motor power on/off; 1; 0; 1; MotorPowerOn; Motor Enabled State; Boolean; Enabled state of Battery power to motor; ; ; ; 0; 0; ; ; 0; 0;
+8; EncoderPower; Encoder Power State; Turn encoder power on/off; 1; 0; 1; EncoderPowerOn; Encoder Enabled State; Boolean; Enabled state of Encoder sensor; ; ; ; 0; 0; ; ; 0; 0;
+9; HallPower; Hall Power State; Turn Hall sensors power on/off; 1; 0; 1; HallSensorPowerOn; Hall Sensor Enabled State; Boolean; Enabled state of Hall sensors; ; ; ; 0; 0; ; ; 0; 0;
+10; ControlMode; Control Mode; Set the motor control mode; 1; 0; 8; controlMode; Control Mode; Enumeration; Control mode of motor; ; ; ; 0; 0; ControlModeVal; ; 0; 0;
+12; BackupWheelMode; Backup Wheel Mode; Set the back-up wheel mode; 1; 0; 1; BackupMode; BackupMode; Boolean; Enable the back-up mode; ; ; ; 0; 0; ; ; 0; 0;
+20; ClearErrors; Clear Errors; Clear the processor error flags; 1; 0; 8; ClearErrorParam; Clear Error Parameter; UnsignedInteger; Clear error flags parameter. This has to be set to 85 (decimal) to clear the flags; ; ; ; 0; 0; ; ; 0; 0;
+30; Serial; Set Serial; Set serial number; 2; 0; 16; SerialNumber; Serial Number; UnsignedInteger; Serial number; ; ; ; 0; 0; ; ; 0; 0;
+31; I2CAddress; Set I2C Address; Set I2C address; 1; 0; 8; i2CAddress; I2C Address; UnsignedInteger; I2C address; ; ; ; 0; 0; ; ; 0; 0;
+32; CANMask; Set CAN Mask; Set CAN mask; 1; 0; 8; CANAddress; CANAddress; UnsignedInteger; CAN address; ; ; ; 0; 0; ; ; 0; 0;
+33; PWMGain; PWM Gain; General PWM gain; 3; 0; 16; K; K; SignedInteger; Main gain; ; ; ; 0; 0; ;
+ ; ; ; ; ; 16; 8; Kmultiplier; Kmultiplier; UnsignedInteger; Multiplier for main gain; ; ; ; 0; 0; ; ; 0; 0;
+34; MainGain; Main Gain; Main speed controller gain values; 6; 0; 16; Ki; Ki; UnsignedInteger; Integrator gain; ; ; ; 0; 0; ;
+ ; ; ; ; ; 16; 8; KiMultiplier; KiMultiplier; UnsignedInteger; Multiplier for integrator gain; ; ; ; 0; 0; ;
+ ; ; ; ; ; 24; 16; Kd; Kd; UnsignedInteger; Feedback gain; ; ; ; 0; 0; ;
+ ; ; ; ; ; 40; 8; KdMultiplier; KdMultiplier; UnsignedInteger; Multiplier for feedback gain; ; ; ; 0; 0; ; ; 0; 0;
+35; BackupGain; Backup Gain; Backup speed controller gain values; 6; 0; 16; Ki; Ki; UnsignedInteger; Integrator gain; ; ; ; 0; 0; ;
+ ; ; ; ; ; 16; 8; KiMultiplier; KiMultiplier; UnsignedInteger; Multiplier for integrator gain; ; ; ; 0; 0; ;
+ ; ; ; ; ; 24; 16; Kd; Kd; UnsignedInteger; Feedback gain; ; ; ; 0; 0; ;
+ ; ; ; ; ; 40; 8; KdMultiplier; KdMultiplier; UnsignedInteger; Multiplier for feedback gain; ; ; ; 0; 0; ; ; 0; 0;

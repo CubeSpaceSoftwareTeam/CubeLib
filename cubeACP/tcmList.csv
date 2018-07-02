@@ -1,0 +1,310 @@
+ID; Name (source); Name (display); Description; Frame Length (bytes); Channel Offset (bits); Channel Length (bits); Channel Name (source); Channel Name (display); Channel Data Type; Channel Description; Calibration Function (CHANNELVAL=...); Calibration Function Inverse (USERVAL=...); Unit; Range Min; Range Max; List Name (source); Part-Of-ID; Start Channel; Num Channel; Mirrored TC ID; Group
+1; Reset; Reset; Perform a reset; 1; 0; 8; Magic; Magic number; UnsignedInteger; Magic number to make sure it is a valid reset command. Should equal 0x5A; ; ; ; 0; 0; ; ; 0; 0;
+2; UnixTime; Current Unix Time; Current Unix Time; 6; 0; 32; Time; Current Unix Time; UnsignedInteger; Time in s since 01/01/1970, 00:00; ; ; s; 0; 0; ;
+ ; ; ; ; ; 32; 16; MilliSec; Milliseconds; UnsignedInteger; Current millisecond count; ; ; ms; 0; 0; ; ; 0; 0; Satellite State
+3; Cache; Cache enabled state; Cache enabled state; 1; 0; 1; Enabled; Enabled state; Boolean; Enabled state; ; ; ; 0; 0; ; ; 0; 0;
+4; ResetLogPtr; Reset Log Pointer; Reset pointer to log buffer (from where LastLogEvent TLM is returned); 0; ; 0; 0;
+5; AdvanceLogPtr; Advance Log Pointer; Advance pointer to log buffer (from where LastLogEvent TLM is returned); 0; ; 0; 0;
+6; ResetBootRegisters; Reset Boot Registers; Reset Boot Registers; 0; ; 0; 0;
+7; DeployMagnetometer; Deploy Magnetometer Boom; Deploy magnetometer boom; 1; 0; 8; Timeout; Timeout; UnsignedInteger; Deployment actuation timeout value; ; ; s; 0; 0; ; ; 0; 0;
+8; SramScrubSettings; SRAM Scrub Parameters; SRAM scrubbing size; 2; 0; 16; ScrubSize; Scrub Size; UnsignedInteger; Scrub Size; ; ; ; 0; 0; ; ; 0; 0;
+9; UnixTimeSave; Unix Time Save to Flash; Configuration settings for unixtime flash memory persistence; 2; 0; 1; SaveNow; Save Now; Boolean; Save current unixtime to flash memory; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1; 1; SaveOnUpdate; Save On Update; Boolean; Save unixtime to flash memory whenever there is a command to update the unixtime; ; ; ; 0; 0; ;
+ ; ; ; ; ; 2; 1; SavePeriodic; Save Periodic; Boolean; Save unixtime to flash memory periodically; ; ; ; 0; 0; ;
+ ; ; ; ; ; 8; 8; Period; Period; UnsignedInteger; Interval at which to save unixtime to flash memory; ; ; s; 0; 0; ; ; 0; 0;
+10; AdcsEnabled; ADCS Run Mode; Set ADCS enabled state & control loop behaviour; 1; 0; 8; Enabled; Enabled; Enumeration; Set ADCS enabled state. When disabled the CubeACP will not use the ADCS I2C bus; ; ; ; 0; 0; AdcsRunMode; ; 0; 0;
+11; AdcsPower; ADCS Power Control; Control power to selected components; 3; 0; 2; CubeControlSignalPower; CubeControl Signal Power Selection; Enumeration; Control power to electronics of CubeControl Signal PIC; ; ; ; 0; 0; PowerSelect;
+ ; ; ; ; ; 2; 2; CubeControlMotorPower; CubeControl Motor Power Selection; Enumeration; Control power to electronics of CubeControl Motor PIC; ; ; ; 0; 0; PowerSelect;
+ ; ; ; ; ; 4; 2; CubeSensePower; CubeSense Power Selection; Enumeration; Control power to the CubeSense; ; ; ; 0; 0; PowerSelect;
+ ; ; ; ; ; 6; 2; CubeStarPower; CubeStarPower Power Selection; Enumeration; Control power to the CubeStar; ; ; ; 0; 0; PowerSelect;
+ ; ; ; ; ; 8; 2; CubeWheel1Power; CubeWheel1Power Power Selection; Enumeration; Control power to the CubeWheel1; ; ; ; 0; 0; PowerSelect;
+ ; ; ; ; ; 10; 2; CubeWheel2Power; CubeWheel2Power Power Selection; Enumeration; Control power to the CubeWheel2; ; ; ; 0; 0; PowerSelect;
+ ; ; ; ; ; 12; 2; CubeWheel3Power; CubeWheel3Power Power Selection; Enumeration; Control power to the CubeWheel3; ; ; ; 0; 0; PowerSelect;
+ ; ; ; ; ; 14; 2; MotorPower; Motor Power; Enumeration; Control power to Motor electronics; ; ; ; 0; 0; PowerSelect;
+ ; ; ; ; ; 16; 2; GpsLnaPower; GPS Power; Enumeration; Control power to GPS LNA; ; ; ; 0; 0; PowerSelect; ; 0; 0;
+12; ClearErrors; Clear Errors; Clear Latched Error Flags; 1; 0; 1; ADCSErrors; ADCS Error Flags; Boolean; Clear ADCS error flags; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1; 1; HKErrors; HK Error Flags; Boolean; Clear HK Error flags; ; ; ; 0; 0; ; ; 0; 0;
+13; ControlMode; Set Attitude Control Mode; Set attitude control mode; 4; 0; 8; ControlModeSelection; Control Mode; Enumeration; Attitude control mode; ; ; ; 0; 0; ConModeSelect;
+ ; ; ; ; ; 8; 1; OverrideErrors; Override flag; Boolean; Ignore current state and force control mode (if this flag is not set, certain control transitions will not be allowed); ; ; ; 0; 0; ;
+ ; ; ; ; ; 16; 16; Timeout; Timeout; UnsignedInteger; Control timeout duration. Control will revert to None when timer reaches zero. 0xFFFF for infinite timeout; ; ; s; 0; 0; ; ; 0; 0;
+14; EstimMode; Set Attitude Estimation Mode; Set attitude estimation mode; 1; 0; 8; EstimModeSelection; Attitude Estimation Mode; Enumeration; Attitude estimation mode; ; ; ; 0; 0; EstimModeSelect; ; 0; 0;
+15; CmdAttitude; Commanded Attitude Angles; Commanded attitude angles; 6; 0; 16; Roll; Commanded Roll Angle; SignedInteger; Commanded roll angle; RAWVAL*0.01; USERVAL*100.0; deg; -9000; 9000; ;
+ ; ; ; ; ; 16; 16; Pitch; Commanded Pitch Angle; SignedInteger; Commanded pitch angle; RAWVAL*0.01; USERVAL*100.0; deg; -18000; 18000; ;
+ ; ; ; ; ; 32; 16; Yaw; Commanded Yaw Angle; SignedInteger; Commanded yaw angle; RAWVAL*0.01; USERVAL*100.0; deg; -18000; 18000; ; ; 0; 0;
+16; TorquerCmd; Set Magnetorquer Output; Set magnetorquer output (only valid if Control Mode is None); 6; 0; 16; TorquerX; Commanded X Magnetorquer duty cycle; SignedInteger; Commanded X-torquer duty cycle; RAWVAL*0.001; USERVAL*1000.0; ; -800; 800; ;
+ ; ; ; ; ; 16; 16; TorquerY; Commanded Y Magnetorquer duty cycle; SignedInteger; Commanded Y-torquer duty cycle; RAWVAL*0.001; USERVAL*1000.0; ; -800; 800; ;
+ ; ; ; ; ; 32; 16; TorquerZ; Commanded Z Magnetorquer duty cycle; SignedInteger; Commanded Z-torquer duty cycle; RAWVAL*0.001; USERVAL*1000.0; ; -800; 800; ; ; 0; 0; Actuator Commands
+17; WheelSpeedCmd; Set Wheel Speed; Set wheel speed (only valid if Control Mode is None); 6; 0; 16; WheelX; Commanded X speed; SignedInteger; Commanded X-wheel speed; ; ; rpm; -8000; 8000; ;
+ ; ; ; ; ; 16; 16; WheelY; Commanded Y speed; SignedInteger; Commanded Y-wheel speed; ; ; rpm; -8000; 8000; ;
+ ; ; ; ; ; 32; 16; WheelZ; Commanded Z speed; SignedInteger; Commanded Z-wheel speed; ; ; rpm; -8000; 8000; ; ; 0; 0; Actuator Commands
+18; TriggerAdcs; Trigger ADCS Loop; Trigger ADCS to perform one iteration of the control loop (only valid when ADCS Run Mode is Triggered); 0; ; 0; 0;
+19; TriggerAdcsSensor; Trigger ADCS Loop with Simulated Sensor Data; Trigger ADCS to perform one iteration of the control loop (only valid when ADCS Run Mode is Triggered); 90; 0; 32; UnixTime; Unix Time; UnsignedInteger; Unix time for iteration; ; ; s; 0; 0; ;
+ ; ; ; ; ; 32; 16; CssRaw1; Css Raw 1; UnsignedInteger; CSS1 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 48; 16; CssRaw2; Css Raw 2; UnsignedInteger; CSS2 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 64; 16; CssRaw3; Css Raw 3; UnsignedInteger; CSS3 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 80; 16; CssRaw4; Css Raw 4; UnsignedInteger; CSS4 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 96; 16; CssRaw5; Css Raw 5; UnsignedInteger; CSS5 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 112; 16; CssRaw6; Css Raw 6; UnsignedInteger; CSS6 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 128; 16; CssRaw7; Css Raw 7; UnsignedInteger; CSS7 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 144; 16; CssRaw8; Css Raw 8; UnsignedInteger; CSS8 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 160; 16; CssRaw9; Css Raw 9; UnsignedInteger; CSS9 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 176; 16; CssRaw10; Css Raw 10; UnsignedInteger; CSS10 raw measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 192; 16; Cam1RawX; Cam1 Raw X; SignedInteger; Cam1 sensor raw X angle; ; ; ; 0; 0; ;
+ ; ; ; ; ; 208; 16; Cam1RawY; Cam1 Raw Y; SignedInteger; Cam1 sensor raw Y angle; ; ; ; 0; 0; ;
+ ; ; ; ; ; 224; 8; Cam1Busy; Cam1 Busy; UnsignedInteger; Cam1 sensor capture status; ; ; ; 0; 0; ;
+ ; ; ; ; ; 232; 8; Cam1Result; Cam1 Result; UnsignedInteger; Cam1 sensor detection result; ; ; ; 0; 0; ;
+ ; ; ; ; ; 240; 16; Cam2RawX; Cam2 Raw X; SignedInteger; Cam2 sensor raw X angle; ; ; ; 0; 0; ;
+ ; ; ; ; ; 256; 16; Cam2RawY; Cam2 Raw Y; SignedInteger; Cam2 sensor raw Y angle; ; ; ; 0; 0; ;
+ ; ; ; ; ; 272; 8; Cam2Busy; Cam2 Busy; UnsignedInteger; Cam2 sensor capture status; ; ; ; 0; 0; ;
+ ; ; ; ; ; 280; 8; Cam2Result; Cam2 Result; UnsignedInteger; Cam2 sensor detection result; ; ; ; 0; 0; ;
+ ; ; ; ; ; 288; 16; MagRawX; Mag Raw X; SignedInteger; Raw magnetometer X measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 304; 16; MagRawY; Mag Raw Y; SignedInteger; Raw magnetometer Y measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 320; 16; MagRawZ; Mag Raw Z; SignedInteger; Raw magnetometer Z measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 336; 16; RateRawX; Rate Raw X; SignedInteger; Raw X rate sensor measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 352; 16; RateRawY; Rate Raw Y; SignedInteger; Raw Y rate sensor measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 368; 16; RateRawZ; Rate Raw Z; SignedInteger; Raw Z rate sensor measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 384; 16; WheelRawX; Wheel Raw X; SignedInteger; Raw X wheel speed measurement; ; ; rpm; 0; 0; ;
+ ; ; ; ; ; 400; 16; WheelRawY; Wheel Raw Y; SignedInteger; Raw Y wheel speed measurement; ; ; rpm; 0; 0; ;
+ ; ; ; ; ; 416; 16; WheelRawZ; Wheel Raw Z; SignedInteger; Raw Z wheel speed measurement; ; ; rpm; 0; 0; ;
+ ; ; ; ; ; 432; 16; Star1CameraX; Star1CameraX; SignedInteger; Star1 camera X-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 448; 16; Star1CameraY; Star1CameraY; SignedInteger; Star1 camera Y-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 464; 16; Star1CameraZ; Star1CameraZ; SignedInteger; Star1 camera Z-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 480; 16; Star1InertialX; Star1InertialX; SignedInteger; Star1 inertial X-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 496; 16; Star1InertialY; Star1InertialY; SignedInteger; Star1 inertial Y-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 512; 16; Star1InertialZ; Star1InertialZ; SignedInteger; Star1 inertial Z-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 528; 16; Star2CameraX; Star2CameraX; SignedInteger; Star2 camera X-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 544; 16; Star2CameraY; Star2CameraY; SignedInteger; Star2 camera Y-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 560; 16; Star2CameraZ; Star2CameraZ; SignedInteger; Star2 camera Z-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 576; 16; Star2InertialX; Star2InertialX; SignedInteger; Star2 inertial X-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 592; 16; Star2InertialY; Star2InertialY; SignedInteger; Star2 inertial Y-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 608; 16; Star2InertialZ; Star2InertialZ; SignedInteger; Star2 inertial Z-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 624; 16; Star3CameraX; Star3CameraX; SignedInteger; Star3 camera X-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 640; 16; Star3CameraY; Star3CameraY; SignedInteger; Star3 camera Y-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 656; 16; Star3CameraZ; Star3CameraZ; SignedInteger; Star3 camera Z-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 672; 16; Star3InertialX; Star3InertialX; SignedInteger; Star3 inertial X-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 688; 16; Star3InertialY; Star3InertialY; SignedInteger; Star3 inertial Y-vector; ; ; ; 0; 0; ;
+ ; ; ; ; ; 704; 16; Star3InertialZ; Star3InertialZ; SignedInteger; Star3 inertial Z-vector; ; ; ; 0; 0; ; ; 0; 0;
+20; AdcsConfig; ADCS Configuration; Current configuration; 272; 0; 8; Magtorq1; Magnetorquer 1 Configuration; Enumeration; Magnetorquer 1 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 8; 8; Magtorq2; Magnetorquer 2 Configuration; Enumeration; Magnetorquer 2 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 16; 8; Magtorq3; Magnetorquer 3 Configuration; Enumeration; Magnetorquer 3 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 24; 8; RW1Conf; RW1 Configuration; Enumeration; RW1 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 32; 8; RW2Conf; RW2 Configuration; Enumeration; RW2 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 40; 8; RW3Conf; RW3 Configuration; Enumeration; RW3 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 48; 8; RW4Conf; RW4 Configuration; Enumeration; RW4 or Momentum wheel Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 56; 8; Gyro1Conf; Gyro1 Configuration; Enumeration; Gyro1 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 64; 8; Gyro2Conf; Gyro2 Configuration; Enumeration; Gyro2 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 72; 8; Gyro3Conf; Gyro3 Configuration; Enumeration; Gyro3 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 80; 8; Css1Conf; CSS1 Configuration; Enumeration; CSS1 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 88; 8; Css2Conf; CSS2 Configuration; Enumeration; CSS2 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 96; 8; Css3Conf; CSS3 Configuration; Enumeration; CSS3 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 104; 8; Css4Conf; CSS4 Configuration; Enumeration; CSS4 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 112; 8; Css5Conf; CSS5 Configuration; Enumeration; CSS5 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 120; 8; Css6Conf; CSS6 Configuration; Enumeration; CSS6 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 128; 8; Css7Conf; CSS7 Configuration; Enumeration; CSS7 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 136; 8; Css8Conf; CSS8 Configuration; Enumeration; CSS8 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 144; 8; Css9Conf; CSS9 Configuration; Enumeration; CSS9 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 152; 8; Css10Conf; CSS10 Configuration; Enumeration; CSS10 Configuration; ; ; ; 0; 0; AxisSelect;
+ ; ; ; ; ; 160; 8; Css1Scale; CSS1 Relative Scale; UnsignedInteger; CSS1 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 168; 8; Css2Scale; CSS2 Relative Scale; UnsignedInteger; CSS2 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 176; 8; Css3Scale; CSS3 Relative Scale; UnsignedInteger; CSS3 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 184; 8; Css4Scale; CSS4 Relative Scale; UnsignedInteger; CSS4 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 192; 8; Css5Scale; CSS5 Relative Scale; UnsignedInteger; CSS5 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 200; 8; Css6Scale; CSS6 Relative Scale; UnsignedInteger; CSS6 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 208; 8; Css7Scale; CSS7 Relative Scale; UnsignedInteger; CSS7 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 216; 8; Css8Scale; CSS8 Relative Scale; UnsignedInteger; CSS8 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 224; 8; Css9Scale; CSS9 Relative Scale; UnsignedInteger; CSS9 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 232; 8; Css10Scale; CSS10 Relative Scale; UnsignedInteger; CSS10 Relative Scaling Factor; RAWVAL*0.01; USERVAL*100.0; ; 0; 0; ;
+ ; ; ; ; ; 240; 8; CssMinimum; CSS Threshold; UnsignedInteger; CSS Threshold; ; ; ; 0; 0; ;
+ ; ; ; ; ; 248; 16; Cam1Angle1; Cam1 Sensor Mounting Transform Alpha Angle; SignedInteger; Cam1 Sensor Mounting Transform Alpha Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 264; 16; Cam1Angle2; Cam1 Sensor Mounting Transform Beta Angle; SignedInteger; Cam1 Sensor Mounting Transform Beta Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 280; 16; Cam1Angle3; Cam1 Sensor Mounting Transform Gamma Angle; SignedInteger; Cam1 Sensor Mounting Transform Gamma Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 296; 8; Cam1Threshold; Cam1 detection threshold; UnsignedInteger; ; ; ; ; 0; 0; ;
+ ; ; ; ; ; 304; 1; Cam1AutoAdj; Cam1 sensor auto adjust mode; Boolean; 0 = disabled and 1 = enabled; ; ; ; 0; 0; ;
+ ; ; ; ; ; 312; 16; Cam1Exposure; Cam1 sensor exposure time; UnsignedInteger; exposure time register value; ; ; ; 0; 0; ;
+ ; ; ; ; ; 328; 16; Cam1BoreX; Cam1 Boresight X; UnsignedInteger; X Pixel location of Cam1 boresight; RAWVAL*0.01; USERVAL*100.0; pixels; 0; 0; ;
+ ; ; ; ; ; 344; 16; Cam1BoreY; Cam1 Boresight Y; UnsignedInteger; Y Pixel location of Cam1 boresight; RAWVAL*0.01; USERVAL*100.0; pixels; 0; 0; ;
+ ; ; ; ; ; 360; 1; Cam1Shift; Cam1 Shift; Boolean; Use Cam2 processing chain for Cam1 detection; ; ; ; 0; 0; ;
+ ; ; ; ; ; 368; 16; Cam2Angle1; Cam2 Sensor Mounting Transform Alpha Angle; SignedInteger; Cam2 Sensor Mounting Transform Alpha Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 384; 16; Cam2Angle2; Cam2 Sensor Mounting Transform Beta Angle; SignedInteger; Cam2 Sensor Mounting Transform Beta Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 400; 16; Cam2Angle3; Cam2 Sensor Mounting Transform Gamma Angle; SignedInteger; Cam2 Sensor Mounting Transform Gamma Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 416; 8; Cam2Threshold; Cam2 detection threshold; UnsignedInteger; Cam2 detection threshold; ; ; ; 0; 0; ;
+ ; ; ; ; ; 424; 1; Cam2AutoAdj; Cam2 sensor auto adjust mode; Boolean; 0 = disabled and 1 = enabled; ; ; ; 0; 0; ;
+ ; ; ; ; ; 432; 16; Cam2Exposure; Cam2 sensor exposure time; UnsignedInteger; exposure time register value; ; ; ; 0; 0; ;
+ ; ; ; ; ; 448; 16; Cam2BoreX; Cam2 Boresight X; UnsignedInteger; X Pixel location of Cam2 boresight; RAWVAL*0.01; USERVAL*100.0; pixels; 0; 0; ;
+ ; ; ; ; ; 464; 16; Cam2BoreY; Cam2 Boresight Y; UnsignedInteger; Y Pixel location of Cam2 boresight; RAWVAL*0.01; USERVAL*100.0; pixels; 0; 0; ;
+ ; ; ; ; ; 480; 1; Cam2Shift; Cam2 Shift; Boolean; Use Sun processing chain for Cam2 detection; ; ; ; 0; 0; ;
+ ; ; ; ; ; 488; 16; MaskArea1Xmin; Minimum X of area 1; UnsignedInteger; Minimum X of Area 1; ; ; ; 0; 0; ;
+ ; ; ; ; ; 504; 16; MaskArea1Xmax; Maximum X of area 1; UnsignedInteger; Maximum X of Area 1; ; ; ; 0; 0; ;
+ ; ; ; ; ; 520; 16; MaskArea1Ymin; Minimum Y of area 1; UnsignedInteger; Minimum Y of Area 1; ; ; ; 0; 0; ;
+ ; ; ; ; ; 536; 16; MaskArea1Ymax; Maximum Y of area 1; UnsignedInteger; Maximum Y of Area 1; ; ; ; 0; 0; ;
+ ; ; ; ; ; 552; 16; MaskArea2Xmin; Minimum X of area 2; UnsignedInteger; Minimum X of Area 2; ; ; ; 0; 0; ;
+ ; ; ; ; ; 568; 16; MaskArea2Xmax; Maximum X of area 2; UnsignedInteger; Maximum X of Area 2; ; ; ; 0; 0; ;
+ ; ; ; ; ; 584; 16; MaskArea2Ymin; Minimum Y of area 2; UnsignedInteger; Minimum Y of Area 2; ; ; ; 0; 0; ;
+ ; ; ; ; ; 600; 16; MaskArea2Ymax; Maximum Y of area 2; UnsignedInteger; Maximum Y of Area 2; ; ; ; 0; 0; ;
+ ; ; ; ; ; 616; 16; MaskArea3Xmin; Minimum X of area 3; UnsignedInteger; Minimum X of Area 3; ; ; ; 0; 0; ;
+ ; ; ; ; ; 632; 16; MaskArea3Xmax; Maximum X of area 3; UnsignedInteger; Maximum X of Area 3; ; ; ; 0; 0; ;
+ ; ; ; ; ; 648; 16; MaskArea3Ymin; Minimum Y of area 3; UnsignedInteger; Minimum Y of Area 3; ; ; ; 0; 0; ;
+ ; ; ; ; ; 664; 16; MaskArea3Ymax; Maximum Y of area 3; UnsignedInteger; Maximum Y of Area 3; ; ; ; 0; 0; ;
+ ; ; ; ; ; 680; 16; MaskArea4Xmin; Minimum X of area 4; UnsignedInteger; Minimum X of Area 4; ; ; ; 0; 0; ;
+ ; ; ; ; ; 696; 16; MaskArea4Xmax; Maximum X of area 4; UnsignedInteger; Maximum X of Area 4; ; ; ; 0; 0; ;
+ ; ; ; ; ; 712; 16; MaskArea4Ymin; Minimum Y of area 4; UnsignedInteger; Minimum Y of Area 4; ; ; ; 0; 0; ;
+ ; ; ; ; ; 728; 16; MaskArea4Ymax; Maximum Y of area 4; UnsignedInteger; Maximum Y of Area 4; ; ; ; 0; 0; ;
+ ; ; ; ; ; 744; 16; MaskArea5Xmin; Minimum X of area 5; UnsignedInteger; Minimum X of Area 5; ; ; ; 0; 0; ;
+ ; ; ; ; ; 760; 16; MaskArea5Xmax; Maximum X of area 5; UnsignedInteger; Maximum X of Area 5; ; ; ; 0; 0; ;
+ ; ; ; ; ; 776; 16; MaskArea5Ymin; Minimum Y of area 5; UnsignedInteger; Minimum Y of Area 5; ; ; ; 0; 0; ;
+ ; ; ; ; ; 792; 16; MaskArea5Ymax; Maximum Y of area 5; UnsignedInteger; Maximum Y of Area 5; ; ; ; 0; 0; ;
+ ; ; ; ; ; 808; 16; MagmAngle1; Magnetometer Mounting Transform Alpha Angle; SignedInteger; Magnetometer Mounting Transform Alpha Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 824; 16; MagmAngle2; Magnetometer Mounting Transform Beta Angle; SignedInteger; Magnetometer Mounting Transform Beta Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 840; 16; MagmAngle3; Magnetometer Mounting Transform Gamma Angle; SignedInteger; Magnetometer Mounting Transform Gamma Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 856; 16; MagmOffset1; Magnetometer Channel 1 Offset; SignedInteger; Magnetometer Channel 1 Offset; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 872; 16; MagmOffset2; Magnetometer Channel 2 Offset; SignedInteger; Magnetometer Channel 2 Offset; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 888; 16; MagmOffset3; Magnetometer Channel 3 Offset; SignedInteger; Magnetometer Channel 3 Offset; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 904; 16; MagmSens11; Magnetometer Sensitivity Matrix S11; SignedInteger; Magnetometer Sensitivity Matrix S11; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 920; 16; MagmSens22; Magnetometer Sensitivity Matrix S22; SignedInteger; Magnetometer Sensitivity Matrix S22; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 936; 16; MagmSens33; Magnetometer Sensitivity Matrix S33; SignedInteger; Magnetometer Sensitivity Matrix S33; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 952; 16; MagmSens12; Magnetometer Sensitivity Matrix S12; SignedInteger; Magnetometer Sensitivity Matrix S12; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 968; 16; MagmSens13; Magnetometer Sensitivity Matrix S13; SignedInteger; Magnetometer Sensitivity Matrix S13; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 984; 16; MagmSens21; Magnetometer Sensitivity Matrix S21; SignedInteger; Magnetometer Sensitivity Matrix S21; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 1000; 16; MagmSens23; Magnetometer Sensitivity Matrix S23; SignedInteger; Magnetometer Sensitivity Matrix S23; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 1016; 16; MagmSens31; Magnetometer Sensitivity Matrix S31; SignedInteger; Magnetometer Sensitivity Matrix S31; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 1032; 16; MagmSens32; Magnetometer Sensitivity Matrix S32; SignedInteger; Magnetometer Sensitivity Matrix S32; RAWVAL*0.001; USERVAL*1000.0; ; 0; 0; ;
+ ; ; ; ; ; 1048; 16; XRateOffset; X-Rate Sensor Offset; SignedInteger; X-Rate Sensor Offset; RAWVAL*0.001; USERVAL*1000.0; deg/s; 0; 0; ;
+ ; ; ; ; ; 1064; 16; YRateOffset; Y-Rate Sensor Offset; SignedInteger; Y-Rate Sensor Offset; RAWVAL*0.001; USERVAL*1000.0; deg/s; 0; 0; ;
+ ; ; ; ; ; 1080; 16; ZRateOffset; Z-Rate Sensor Offset; SignedInteger; Z-Rate Sensor Offset; RAWVAL*0.001; USERVAL*1000.0; deg/s; 0; 0; ;
+ ; ; ; ; ; 1096; 8; RateSensorMult; RateSensorMult; UnsignedInteger; Multiplier of rate sensor measurement; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1104; 16; StarAngle1; StarTracker Mounting Transform Alpha Angle; SignedInteger; StarTracker Mounting Transform Alpha Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 1120; 16; StarAngle2; StarTracker Mounting Transform Beta Angle; SignedInteger; StarTracker Mounting Transform Beta Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 1136; 16; StarAngle3; StarTracker Mounting Transform Gamma Angle; SignedInteger; StarTracker Mounting Transform Gamma Angle; RAWVAL*0.01; USERVAL*100.0; deg; 0; 0; ;
+ ; ; ; ; ; 1152; 16; StarExposure; StarTracker exposure time; UnsignedInteger; exposure time register value; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1168; 8; DetectionThreshold; StarTracker detection threshold; UnsignedInteger; StarTracker detection threshold; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1176; 8; StarThreshold; StarTracker star threshold; UnsignedInteger; StarTracker star threshold; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1184; 8; MaxStarMatched; Maximum Star Matched; UnsignedInteger; Maximum of stars that the star tracker will match; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1192; 8; MaxStarPixel; Maximum Star Pixel; UnsignedInteger; Maximum pixels in a star; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1200; 8; MaxStarNoise; Maximum Star Noise; UnsignedInteger; Maximum star pixel noise; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1208; 8; MinStarPixel; Minimum Star Pixel; UnsignedInteger; Minimum pixels in a star; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1216; 8; StarErrorMargin; Star Tracker Error Margin; UnsignedInteger; % Error margin of the star identification; RAWVAL*0.01; USERVAL*100.0; %; 0; 0; ;
+ ; ; ; ; ; 1224; 32; StarCentX; Star Tracker Centroid X; FloatingPoint; Pixel centroid X; ; ; ; -5000; 5000; ;
+ ; ; ; ; ; 1256; 32; StarCentY; Star Tracker Centroid Y; FloatingPoint; Pixel centroid Y; ; ; ; -5000; 5000; ;
+ ; ; ; ; ; 1288; 16; StarFocal; Star Tracker Focal Length; UnsignedInteger; Star Tracker Focal Length; RAWVAL*0.0001; USERVAL*10000.0; mm; 0; 0; ;
+ ; ; ; ; ; 1304; 8; SyncDelay; Synch Delay; UnsignedInteger; Synchronization delay within star Tracker; ; ; ; 0; 0; ;
+ ; ; ; ; ; 1312; 32; Ks; Detumbling Spin Gain; FloatingPoint; Detumbling Spin Gain (Ks); ; ; ; 0; 10000; ;
+ ; ; ; ; ; 1344; 32; Kd; Detumbling Damping Gain; FloatingPoint; Detumbling Damping Gain (Kd); ; ; ; 0; 10000; ;
+ ; ; ; ; ; 1376; 16; wy_ref; Reference spin rate; SignedInteger; Reference spin rate (wy-ref). Must always be smaller than 0; RAWVAL*0.001; USERVAL*1000.0; deg/s; -100000; 0; ;
+ ; ; ; ; ; 1392; 32; Kdf; Fast BDot Detumbling Gain; FloatingPoint; Fast BDot Detumbling Gain; ; ; ; 0; 100; ;
+ ; ; ; ; ; 1424; 32; Kh; Y-Momentum Control Gain; FloatingPoint; Y-Momentum Control Gain (Kh); ; ; ; 0; 10000; ;
+ ; ; ; ; ; 1456; 32; Kn; Y-momentum Nutation Damping Gain; FloatingPoint; Y-momentum Nutation Damping Gain (Kn); ; ; ; 0; 10000; ;
+ ; ; ; ; ; 1488; 32; Kp1; Y-momentum Proportional Gain; FloatingPoint; Y-momentum Proportional Gain (Kp1); ; ; ; 0; 100; ;
+ ; ; ; ; ; 1520; 32; Kd1; Y-momentum Derivative Gain; FloatingPoint; Y-momentum Derivative Gain (Kd1); ; ; ; 0; 100; ;
+ ; ; ; ; ; 1552; 32; H_ref; Reference Wheel Momentum; FloatingPoint; Reference Wheel Momentum (H-ref). Must always be smaller than 0; ; ; Nms; -10; 0; ;
+ ; ; ; ; ; 1584; 32; Kp2; RWheel Proportional Gain; FloatingPoint; RWheel Proportional Gain (Kp2); ; ; ; 0; 100; ;
+ ; ; ; ; ; 1616; 32; Kd2; RWheel Derivative Gain; FloatingPoint; RWheel Derivative Gain (Kd2); ; ; ; 0; 100; ;
+ ; ; ; ; ; 1648; 32; Kp3; Tracking Proportional Gain; FloatingPoint; Tracking Proportional Gain (Kp3); ; ; ; 0; 100; ;
+ ; ; ; ; ; 1680; 32; Kd3; Tracking Derivative Gain; FloatingPoint; Tracking Derivative Gain (Kd3); ; ; ; 0; 100; ;
+ ; ; ; ; ; 1712; 32; Ki3; Tracking Integral Gain; FloatingPoint; Tracking Integral Gain (Ki3); ; ; ; 0; 100; ;
+ ; ; ; ; ; 1744; 32; Ixx; Moment Of Inertia - Ixx; FloatingPoint; Moment Of Inertia - Ixx; ; ; kg.m^2; 0; 10; ;
+ ; ; ; ; ; 1776; 32; Iyy; Moment Of Inertia - Iyy; FloatingPoint; Moment Of Inertia - Iyy; ; ; kg.m^2; 0; 10; ;
+ ; ; ; ; ; 1808; 32; Izz; Moment Of Inertia - Izz; FloatingPoint; Moment Of Inertia - Izz; ; ; kg.m^2; 0; 10; ;
+ ; ; ; ; ; 1840; 32; Ixy; Moment Of Inertia - Ixy; FloatingPoint; Moment Of Inertia - Ixy; ; ; kg.m^2; -10; 10; ;
+ ; ; ; ; ; 1872; 32; Ixz; Moment Of Inertia - Ixz; FloatingPoint; Moment Of Inertia - Ixz; ; ; kg.m^2; -10; 10; ;
+ ; ; ; ; ; 1904; 32; Iyz; Moment Of Inertia - Iyz; FloatingPoint; Moment Of Inertia - Iyz; ; ; kg.m^2; -10; 10; ;
+ ; ; ; ; ; 1936; 32; MagRateNoise; Magnetometer Rate Filter System Noise; FloatingPoint; Magnetometer Rate Filter System Noise; ; ; ; 0; 100; ;
+ ; ; ; ; ; 1968; 32; EkfSysNoise; EKF System Noise; FloatingPoint; EKF System Noise; ; ; ; 0; 100; ;
+ ; ; ; ; ; 2000; 32; CssNoise; CSS Measurement Noise; FloatingPoint; CSS Measurement Noise; ; ; ; 0; 100; ;
+ ; ; ; ; ; 2032; 32; SunNoise; Sun Sensor Measurement Noise; FloatingPoint; Sun Sensor Measurement Noise; ; ; ; 0; 100; ;
+ ; ; ; ; ; 2064; 32; NadirNoise; Nadir Sensor Measurement Noise; FloatingPoint; Nadir Sensor Measurement Noise; ; ; ; 0; 100; ;
+ ; ; ; ; ; 2096; 32; MagNoise; Magnetometer Measurement Noise; FloatingPoint; Magnetometer Measurement Noise; ; ; ; 0; 100; ;
+ ; ; ; ; ; 2128; 32; StarNoise; Star Tracker Measurement Noise; FloatingPoint; Star Tracker Measurement Noise; ; ; ; 0; 100; ;
+ ; ; ; ; ; 2160; 1; UseSunEst; Use Sun Sensor; Boolean; Use Sun Sensor measurement in EKF; ; ; ; 0; 0; ;
+ ; ; ; ; ; 2161; 1; UseNadirEst; Use Nadir Sensor; Boolean; Use Nadir Sensor measurement in EKF; ; ; ; 0; 0; ;
+ ; ; ; ; ; 2162; 1; UseCssEst; Use CSS; Boolean; Use CSS measurement in EKF; ; ; ; 0; 0; ;
+ ; ; ; ; ; 2163; 1; UseStarEst; Use Star Tracker; Boolean; Use Star Tracker measurement in EKF; ; ; ; 0; 0; ;
+ ; ; ; ; ; 2164; 2; MagMode; Magnetometer Mode; Enumeration; Mode describing which magnetometer is used for estimation and control; ; ; ; 0; 0; MagModeVal;
+ ; ; ; ; ; 2168; 8; Cam1Cam2Period; Cam1 and Cam2 Sampling Period; UnsignedInteger; Cam1 and Cam2 sensor sampling period. Lower four bits are Cam1 period and upper four bits the Cam2 period. Setting period to zero for sensor will disable sampling of sensor.; ; ; s; 0; 0; ; ; 0; 0; Configuration
+21; MagtorqConfig; Set Magnetorquer Configuration; Set magnetorquer configuration parameters; 3; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 0; 3; Configuration
+22; WheelConfig; Set Wheel Configuration; Set  wheel configuration parameters; 4; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 3; 4; Configuration
+23; GyroConfig; Set Rate Gyro Configuration; Set rate gyro configuration parameters; 3; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 7; 3; Configuration
+24; CssConfig1; Set CSS Alignment Configuration; Set photodiode pointing directions; 10; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 10; 10; Configuration
+25; CssConfig2; Set CSS Scale Factor Configuration; Set photodiode scale factors; 11; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 20; 11; Configuration
+26; Cam1Config; Set Cam1 Sensor Configuration; Set Cam1 sensor configuration parameters; 15; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 31; 9; Configuration
+27; Cam2Config; Set Cam2 Sensor Configuration; Set Cam2 sensor configuration parameters; 15; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 40; 9; Configuration
+28; NadirMaskConfig1; Set Nadir Sensor Mask Configuration 1; Set Nadir Sensor Mask Configuration 1; 8; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 49; 4; Configuration
+29; NadirMaskConfig2; Set Nadir Sensor Mask Configuration 2; Set Nadir Sensor Mask Configuration 2; 8; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 53; 4; Configuration
+30; NadirMaskConfig3; Set Nadir Sensor Mask Configuration 3; Set Nadir Sensor Mask Configuration 3; 8; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 57; 4; Configuration
+31; NadirMaskConfig4; Set Nadir Sensor Mask Configuration 4; Set Nadir Sensor Mask Configuration 4; 8; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 61; 4; Configuration
+32; NadirMaskConfig5; Set Nadir Sensor Mask Configuration 5; Set Nadir Sensor Mask Configuration 5; 8; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 65; 4; Configuration
+33; MagConfig1; Set Magnetometer Mounting Configuration; Set magnetometer mounting configuration parameters; 6; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 69; 3; Configuration
+34; MagConfig2; Set Magnetometer Offset and Scaling Configuration; Set Magnetometer Offset and Scaling Configuration; 12; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 72; 6; Configuration
+35; MagConfig3; Set Magnetometer Sensitivity Configuration; Set Magnetometer Sensitivity Configuration; 12; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 78; 6; Configuration
+36; RateConfig; Set Rate Sensor Configuration; Set Rate Sensor Offsets; 7; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 84; 4; Configuration
+37; StarConfig; Set Star Tracker Configuration; Set configurations of CubeStar; 26; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 88; 15; Configuration
+38; DetumbleParams; Set Detumbling Control Parameters; Set controller gains and reference values for Detumbling control mode; 14; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 103; 4; Configuration
+39; YWheelParams; Set Y-Wheel Control Parameters; Set controller gains and reference value for Y-wheel control mode; 20; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 107; 5; Configuration
+40; RWheelParams; Set Reaction Wheel Control Parameters; Set controller gains and reference value for reaction wheel control mode; 8; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 112; 2; Configuration
+41; MoI; Set Moments of Inertia; Set satellite moments of inertia; 12; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 117; 3; Configuration
+42; PoI; Set Products of Inertia; Set satellite products of inertia; 12; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 120; 3; Configuration
+43; EstimParams1; Set Estimation Parameters 1; Set estimation noise covariance and sensor mask 1; 16; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 123; 4; Configuration
+44; EstimParams2; Set Estimation Parameters 2; Set estimation noise covariance and sensor mask 2; 14; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 127; 9; Configuration
+45; OrbitParameters; SGP4 Orbit Parameters; SGP4 Orbit Parameters; 64; 0; 64; Inclination; Inclination; FloatingPoint; Inclination; ; ; deg; 0; 180; ;
+ ; ; ; ; ; 64; 64; Eccentricity; Eccentricity; FloatingPoint; Eccentricity; ; ; ; 0; 1; ;
+ ; ; ; ; ; 128; 64; Raan; Right-ascension of the Ascending Node; FloatingPoint; Right-ascension of the Ascending Node; ; ; deg; 0; 360; ;
+ ; ; ; ; ; 192; 64; ArgPerigee; Argument of Perigee; FloatingPoint; Argument of Perigee; ; ; deg; 0; 360; ;
+ ; ; ; ; ; 256; 64; Bstar; B-Star drag term; FloatingPoint; B-Star drag term; ; ; ; 0; 1; ;
+ ; ; ; ; ; 320; 64; MeanMotion; Mean Motion; FloatingPoint; Mean Motion; ; ; orbits/day; 0; 20; ;
+ ; ; ; ; ; 384; 64; MeanAnomaly; Mean Anomaly; FloatingPoint; Mean Anomaly; ; ; deg; 0; 360; ;
+ ; ; ; ; ; 448; 64; Epoch; Epoch; FloatingPoint; Epoch (year.day); ; ; year.day; 0; 100000; ; ; 0; 0; Configuration
+46; OrbitInclination; Set SGP4 Orbit Inclination; Set SGP4 Orbit Inclination; 8; ; ; ; ; ; ; ; ; ; ; ; ; OrbitParameters; 0; 1; Configuration
+47; OrbitEccentricity; Set SGP4 Orbit Eccentricity; Set SGP4 Orbit Eccentricity; 8; ; ; ; ; ; ; ; ; ; ; ; ; OrbitParameters; 1; 1; Configuration
+48; OrbitRaan; Set SGP4 Orbit RAAN; Set SGP4 Orbit RAAN; 8; ; ; ; ; ; ; ; ; ; ; ; ; OrbitParameters; 2; 1; Configuration
+49; OrbitArgPer; Set SGP4 Orbit Argument of Perigee; Set SGP4 Orbit Argument of Perigee; 8; ; ; ; ; ; ; ; ; ; ; ; ; OrbitParameters; 3; 1; Configuration
+50; OrbitBStar; Set SGP4 Orbit B-Star Drag term; Set SGP4 Orbit B-Star Drag term; 8; ; ; ; ; ; ; ; ; ; ; ; ; OrbitParameters; 4; 1; Configuration
+51; OrbitMeanMot; Set SGP4 Orbit Mean Motion; Set SGP4 Orbit Mean Motion; 8; ; ; ; ; ; ; ; ; ; ; ; ; OrbitParameters; 5; 1; Configuration
+52; OrbitMeanAnom; Set SGP4 Orbit Mean Anomaly; Set SGP4 Orbit Mean Anomaly; 8; ; ; ; ; ; ; ; ; ; ; ; ; OrbitParameters; 6; 1; Configuration
+53; OrbitEpoch; Set SGP4 Orbit Epoch; Set SGP4 Orbit Epoch; 8; ; ; ; ; ; ; ; ; ; ; ; ; OrbitParameters; 7; 1; Configuration
+54; TrackingParams; Set Tracking Controller Gain Parameters; Set controller gains for tracking control mode; 12; ; ; ; ; ; ; ; ; ; ; ; ; AdcsConfig; 114; 3; Configuration
+55; CmdTrackingTarget; Tracking Controller Target Reference; Target reference for tracking control mode; 12; 0; 32; LongRef; Geocentric longitude of target; FloatingPoint; Geocentric longitude of target; ; ; deg; 0; 360; ;
+ ; ; ; ; ; 32; 32; LatRef; Geocentric latitude of target; FloatingPoint; Geocentric latitude of target; ; ; deg; -90; 90; ;
+ ; ; ; ; ; 64; 32; AltRef; Geocentric altitude of target; FloatingPoint; Geocentric altitude of target; ; ; meter; -20000; 20000; ; ; 0; 0;
+56; MagMode; Set Mode of Magnetometer Operation; Use of main or redundant magnetometer; 1; 0; 8; ModeSetting; Magnetometer Mode; Enumeration; Mode describing which magnetometer is used for estimation and control; ; ; ; 0; 0; MagModeVal; ; 0; 0;
+57; Convert; Convert to JPG file; Convert raw or bmp files to JPG; 3; 0; 8; SrcFileCtr; Source File Counter; UnsignedInteger; Source File Counter; ; ; ; 0; 0; ;
+ ; ; ; ; ; 8; 8; QualityFactor; Quality Factor; UnsignedInteger; Quality Factor; ; ; ; 0; 0; ;
+ ; ; ; ; ; 16; 8; WhiteBalance; White Balance; UnsignedInteger; White Balance; ; ; ; 0; 0; ; ; 0; 0;
+60; DefaultConfig; Default Configuration; Retrieves default configuration and saves it to flash; 0; ; 0; 0; Configuration
+63; SaveConfig; Save Configuration; Save current configuration to flash memory; 0; ; 0; 0; Configuration
+64; SaveOrbitParams; Save Orbit Parameters; Save current orbit parameters to flash memory; 0; ; 0; 0; Configuration
+80; SaveImage; Save Image; Save and capture image from one of CubeSense cameras or CubeStar camera to SD card; 2; 0; 8; CameraSelect; Camera Select; Enumeration; Camera Selection; ; ; s; 0; 0; CamSelect;
+ ; ; ; ; ; 8; 8; ImageSize; Image Size; Enumeration; Image size selection; ; ; s; 0; 0; ImSize; ; 0; 0;
+104; LogSdConfig1; SD Log1 Configuration; Log selection and period for LOG1; 13; 0; 80; LogSelection; Log Selection; ByteArray; Log Selection - up to 80 flags indicating which telemetry frames should be logged; ; ; ; 0; 0; ;
+ ; ; ; ; ; 80; 16; Period; Log Period; UnsignedInteger; Log period. Set to 0 to disable logging; ; ; ; 0; 0; ;
+ ; ; ; ; ; 96; 8; Destination; Log Destination; Enumeration; Which SD card to use to store log file; ; ; ; 0; 0; SdLogSelect; ; 0; 0;
+105; LogSdConfig2; SD Log2 Configuration; Log selection and period for LOG2; 13; 0; 80; LogSelection; Log Selection; ByteArray; Log Selection - up to 80 flags indicating which telemetry frames should be logged; ; ; ; 0; 0; ;
+ ; ; ; ; ; 80; 16; Period; Log Period; UnsignedInteger; Log period. Set to 0 to disable logging; ; ; ; 0; 0; ;
+ ; ; ; ; ; 96; 8; Destination; Log Destination; Enumeration; Which SD card to use to store log file; ; ; ; 0; 0; SdLogSelect; ; 0; 0;
+106; LogUartConfig; UART Log Configuration; Log selection and period for UART (unsolicited TLM); 12; 0; 80; Selection; Log Selection; ByteArray; Log Selection - up to 80 flags indicating which telemetry frames should be logged; ; ; ; 0; 0; ;
+ ; ; ; ; ; 80; 16; Period; Log Period; UnsignedInteger; Log period. Set to 0 to disable logging; ; ; ; 0; 0; ; ; 0; 0;
+108; EraseFile; Erase File; Erase File; 3; 0; 8; FileType; File Type; Enumeration; File Type; ; ; ; 0; 0; FileType;
+ ; ; ; ; ; 8; 8; FileCtr; File Counter; UnsignedInteger; File Counter; ; ; ; 0; 0; ;
+ ; ; ; ; ; 16; 1; EraseAll; Erase All; Boolean; Erase All; ; ; ; 0; 0; ; ; 0; 0;
+112; LoadDownloadBlock; Load File Download Block; Fill download buffer with file contents; 8; 0; 8; FileType; File Type; Enumeration; File Type; ; ; ; 0; 0; FileType;
+ ; ; ; ; ; 8; 8; Counter; Counter; UnsignedInteger; Counter; ; ; ; 0; 0; ;
+ ; ; ; ; ; 16; 32; Offset; Offset; UnsignedInteger; Offset; ; ; ; 0; 0; ;
+ ; ; ; ; ; 48; 16; Length; BlockLength; UnsignedInteger; Block Length; ; ; ; 0; 0; ; ; 0; 0;
+113; AdvanceFileListPtr; Advance File List Read Pointer; Advance File List Read Pointer; 0; ; 0; 0;
+114; InitiateFileUpload; Initiate File Upload; Initiate File Upload; 2; 0; 8; Destination; Destination; Enumeration; Destination; ; ; ; 0; 0; FileUploadDestination;
+ ; ; ; ; ; 8; 8; BlockSize; BlockSize; UnsignedInteger; Block Size; ; ; ; 0; 0; ; ; 0; 0;
+115; FileUpload; File Upload Packet; File Upload Packet; 22; 0; 16; PacketNo; Packet Number; UnsignedInteger; Packet Number; ; ; ; 0; 0; ;
+ ; ; ; ; ; 16; 160; FileBytes; File Bytes; ByteArray; File Bytes; ; ; ; 0; 0; ; ; 0; 0;
+116; FinalizeUploadBlock; Finalize Upload Block; Finalize Uploaded File Block; 7; 0; 8; Destination; Destination; Enumeration; Destination; ; ; ; 0; 0; FileUploadDestination;
+ ; ; ; ; ; 8; 32; Offset; Offset; UnsignedInteger; Offset into file; ; ; ; 0; 0; ;
+ ; ; ; ; ; 40; 16; BlockLen; Block Length; UnsignedInteger; Length of block ; ; ; ; 0; 0; ; ; 0; 0;
+117; ResetUploadBlock; Reset Upload Block; Reset HoleMap for Upload Block; 0; ; 0; 0;
+118; ResetFileListPtr; Reset File List Read Pointer; Reset File List Read Pointer; 0; ; 0; 0;
+119; DownloadBurst; Initiate Download Burst; Initiate Download Burst; 2; 0; 8; MessageLength; Message Length; UnsignedInteger; Message Length; ; ; ; 0; 0; ;
+ ; ; ; ; ; 8; 1; IgnoreHoleMap; Ignore Hole Map; Boolean; Ignore Hole Map; ; ; ; 0; 0; ; ; 0; 0;
+120; HoleMap1; Hole Map 1; File Upload Hole Map 1; 16; 0; 128; HoleMap; Hole Map; ByteArray; Hole Map; ; ; ; 0; 0; ; ; 0; 0;
+121; HoleMap2; Hole Map 2; File Upload Hole Map 2; 16; 0; 128; HoleMap; Hole Map; ByteArray; Hole Map; ; ; ; 0; 0; ; ; 0; 0;
+122; HoleMap3; Hole Map 3; File Upload Hole Map 3; 16; 0; 128; HoleMap; Hole Map; ByteArray; Hole Map; ; ; ; 0; 0; ; ; 0; 0;
+123; HoleMap4; Hole Map 4; File Upload Hole Map 4; 16; 0; 128; HoleMap; Hole Map; ByteArray; Hole Map; ; ; ; 0; 0; ; ; 0; 0;
+124; HoleMap5; Hole Map 5; File Upload Hole Map 5; 16; 0; 128; HoleMap; Hole Map; ByteArray; Hole Map; ; ; ; 0; 0; ; ; 0; 0;
+125; HoleMap6; Hole Map 6; File Upload Hole Map 6; 16; 0; 128; HoleMap; Hole Map; ByteArray; Hole Map; ; ; ; 0; 0; ; ; 0; 0;
+126; HoleMap7; Hole Map 7; File Upload Hole Map 7; 16; 0; 128; HoleMap; Hole Map; ByteArray; Hole Map; ; ; ; 0; 0; ; ; 0; 0;
+127; HoleMap8; Hole Map 8; File Upload Hole Map 8; 16; 0; 128; HoleMap; Hole Map; ByteArray; Hole Map; ; ; ; 0; 0; ; ; 0; 0;
