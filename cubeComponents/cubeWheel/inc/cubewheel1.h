@@ -198,8 +198,6 @@ CUBELIB_Result_t CUBEWHEEL1_SendPWMGainCmd(uint8_t nodeid, int16_t k, uint8_t km
 
 CUBELIB_Result_t CUBEWHEEL1_SendResetCmd(uint8_t nodeid, uint8_t resetParam);
 
-CUBELIB_Result_t CUBEWHEEL1_SendSerialCmd(uint8_t nodeid, uint16_t serialNumber);
-
 CUBELIB_Result_t CUBEWHEEL1_ReqStatusErrorFlagsTlm(uint8_t nodeid, CUBEWHEEL1_StatusErrorFlags_t* statusErrorFlags);
 
 CUBELIB_Result_t CUBEWHEEL1_ReqWheelCurrentTlm(uint8_t nodeid, double* wheelCurrent);

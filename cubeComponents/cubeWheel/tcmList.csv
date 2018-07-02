@@ -8,7 +8,6 @@ ID; Name (source); Name (display); Description; Frame Length (bytes); Channel Of
 10; ControlMode; Control Mode; Set the motor control mode; 1; 0; 8; controlMode; Control Mode; Enumeration; Control mode of motor; ; ; ; 0; 0; ControlModeVal; ; 0; 0;
 12; BackupWheelMode; Backup Wheel Mode; Set the back-up wheel mode; 1; 0; 1; BackupMode; BackupMode; Boolean; Enable the back-up mode; ; ; ; 0; 0; ; ; 0; 0;
 20; ClearErrors; Clear Errors; Clear the processor error flags; 1; 0; 8; ClearErrorParam; Clear Error Parameter; UnsignedInteger; Clear error flags parameter. This has to be set to 85 (decimal) to clear the flags; ; ; ; 0; 0; ; ; 0; 0;
-30; Serial; Set Serial; Set serial number; 2; 0; 16; SerialNumber; Serial Number; UnsignedInteger; Serial number; ; ; ; 0; 0; ; ; 0; 0;
 31; I2CAddress; Set I2C Address; Set I2C address; 1; 0; 8; i2CAddress; I2C Address; UnsignedInteger; I2C address; ; ; ; 0; 0; ; ; 0; 0;
 32; CANMask; Set CAN Mask; Set CAN mask; 1; 0; 8; CANAddress; CANAddress; UnsignedInteger; CAN address; ; ; ; 0; 0; ; ; 0; 0;
 33; PWMGain; PWM Gain; General PWM gain; 3; 0; 16; K; K; SignedInteger; Main gain; ; ; ; 0; 0; ;

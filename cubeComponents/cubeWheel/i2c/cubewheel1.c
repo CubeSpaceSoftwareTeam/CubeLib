@@ -362,7 +362,7 @@ CUBELIB_Result_t CUBEWHEEL1_SendBackupWheelModeCmd(uint8_t nodeid, bool backupMo
     // write TtcMessage ID to first element in buffer
     tcBuffer[0] = 12;
 
-    tcBuffer[1] = 
+    tcBuffer[1] =
         (backupMode << 0);
 
     i2cResult = BSP_I2C_masterTransmit(BSP_I2C_SUB, nodeid, I2C_FLAG_WRITE, tcBuffer, 2, NULL, 0);
@@ -417,7 +417,7 @@ CUBELIB_Result_t CUBEWHEEL1_SendControlModeCmd(uint8_t nodeid, CWHEEL1_ControlMo
     // write TtcMessage ID to first element in buffer
     tcBuffer[0] = 10;
 
-    tcBuffer[1] = 
+    tcBuffer[1] =
         (controlMode << 0);
 
     i2cResult = BSP_I2C_masterTransmit(BSP_I2C_SUB, nodeid, I2C_FLAG_WRITE, tcBuffer, 2, NULL, 0);
@@ -435,7 +435,7 @@ CUBELIB_Result_t CUBEWHEEL1_SendEncoderPowerCmd(uint8_t nodeid, bool encoderPowe
     // write TtcMessage ID to first element in buffer
     tcBuffer[0] = 8;
 
-    tcBuffer[1] = 
+    tcBuffer[1] =
         (encoderPowerOn << 0);
 
     i2cResult = BSP_I2C_masterTransmit(BSP_I2C_SUB, nodeid, I2C_FLAG_WRITE, tcBuffer, 2, NULL, 0);
@@ -453,7 +453,7 @@ CUBELIB_Result_t CUBEWHEEL1_SendHallPowerCmd(uint8_t nodeid, bool hallSensorPowe
     // write TtcMessage ID to first element in buffer
     tcBuffer[0] = 9;
 
-    tcBuffer[1] = 
+    tcBuffer[1] =
         (hallSensorPowerOn << 0);
 
     i2cResult = BSP_I2C_masterTransmit(BSP_I2C_SUB, nodeid, I2C_FLAG_WRITE, tcBuffer, 2, NULL, 0);
@@ -508,7 +508,7 @@ CUBELIB_Result_t CUBEWHEEL1_SendMotorPowerCmd(uint8_t nodeid, bool motorPowerOn)
     // write TtcMessage ID to first element in buffer
     tcBuffer[0] = 7;
 
-    tcBuffer[1] = 
+    tcBuffer[1] =
         (motorPowerOn << 0);
 
     i2cResult = BSP_I2C_masterTransmit(BSP_I2C_SUB, nodeid, I2C_FLAG_WRITE, tcBuffer, 2, NULL, 0);
@@ -547,23 +547,6 @@ CUBELIB_Result_t CUBEWHEEL1_SendResetCmd(uint8_t nodeid, uint8_t resetParam)
     *( (uint8_t*)(tcBuffer + 1) ) = resetParam;
 
     i2cResult = BSP_I2C_masterTransmit(BSP_I2C_SUB, nodeid, I2C_FLAG_WRITE, tcBuffer, 2, NULL, 0);
-    if (i2cResult != i2cTransferDone)
-        return i2cResult;
-
-    return CubeLibOk;
-}
-
-CUBELIB_Result_t CUBEWHEEL1_SendSerialCmd(uint8_t nodeid, uint16_t serialNumber)
-{
-    uint8_t* tcBuffer = cWheel1CommsBuffer;
-    I2C_TransferReturn_TypeDef i2cResult;
-
-    // write TtcMessage ID to first element in buffer
-    tcBuffer[0] = 30;
-
-    *( (uint16_t*)(tcBuffer + 1) ) = serialNumber;
-
-    i2cResult = BSP_I2C_masterTransmit(BSP_I2C_SUB, nodeid, I2C_FLAG_WRITE, tcBuffer, 3, NULL, 0);
     if (i2cResult != i2cTransferDone)
         return i2cResult;
 
@@ -609,5 +592,3 @@ CUBELIB_Result_t CUBEWHEEL1_SendWheelTorqueCmd(uint8_t nodeid, int16_t dutyCycle
 
     return CubeLibOk;
 }
-
-
